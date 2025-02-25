@@ -1,0 +1,1 @@
+<view class="message-detail"><view class="title">{{''+showDate.name+''}}</view><view class="buttom-talk"><u--input bind:input="__e" vue-id="ed43e1a0-1" placeholder="请输入内容" border="surround" shape="circle" value="{{value}}" data-event-opts="{{[['^input',[['__set_model',['','value','$event',[]]]]]]}}" bind:__l="__l"></u--input></view></view>

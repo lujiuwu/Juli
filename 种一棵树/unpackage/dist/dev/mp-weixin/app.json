@@ -1,0 +1,78 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/garden/garden",
+    "pages/message/message",
+    "pages/my/my"
+  ],
+  "subPackages": [
+    {
+      "root": "detail-pages",
+      "pages": [
+        "message-detail/message-detail"
+      ]
+    },
+    {
+      "root": "log-pages",
+      "pages": [
+        "days/days"
+      ]
+    },
+    {
+      "root": "purchase-pages",
+      "pages": [
+        "goods/goods",
+        "saplings/saplings"
+      ]
+    },
+    {
+      "root": "show-pages",
+      "pages": [
+        "showAll/showAll",
+        "station/station"
+      ]
+    }
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "种一棵树",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "color": "#8a8a8a",
+    "selectedColor": "#0FD15A",
+    "borderStyle": "black",
+    "fontSize": "12px",
+    "spacing": "5px",
+    "height": "50px",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "static/tabbarIcons/index.png",
+        "selectedIconPath": "static/tabbarIcons/index_active.png"
+      },
+      {
+        "pagePath": "pages/garden/garden",
+        "text": "果园",
+        "iconPath": "static/tabbarIcons/orange.png",
+        "selectedIconPath": "static/tabbarIcons/orange_active.png"
+      },
+      {
+        "pagePath": "pages/message/message",
+        "text": "信息",
+        "iconPath": "static/tabbarIcons/message.png",
+        "selectedIconPath": "static/tabbarIcons/message_active.png"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "text": "我的",
+        "iconPath": "static/tabbarIcons/my.png",
+        "selectedIconPath": "static/tabbarIcons/my_active.png"
+      }
+    ]
+  },
+  "lazyCodeLoading": "requiredComponents",
+  "usingComponents": {}
+}

@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "首页",
+  "navigationBarBackgroundColor": "#E8FADE",
+  "usingComponents": {
+    "u-subsection": "/uni_modules/uview-ui/components/u-subsection/u-subsection",
+    "u-popup": "/uni_modules/uview-ui/components/u-popup/u-popup",
+    "u-upload": "/uni_modules/uview-ui/components/u-upload/u-upload"
+  }
+}
