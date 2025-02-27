@@ -7,7 +7,7 @@
 
 ## 如何贡献
 
-非常欢迎您的加入！[提一个 Issue]([Issues · lujiuwu/SewageControlProject (github.com)](https://github.com/lujiuwu/Juli/issues)) 或者提交一个 `Pull Request`
+非常欢迎您的加入！[提一个 Issue]([Issues · lujiuwu/Juli (github.com)](https://github.com/lujiuwu/Juli/issues)) 或者提交一个 `Pull Request`
 
 **Pull Request:**
 
