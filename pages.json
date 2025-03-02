@@ -1,8 +1,14 @@
 {
 	"easycom": {
-		 "^u-(.*)": "@/uni_modules/uview-ui/components/u-$1/u-$1.vue"
-		},
+		"^u-(.*)": "@/uni_modules/uview-ui/components/u-$1/u-$1.vue"
+	},
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": "登录"
+			}
+		},
 		{
 			"path": "pages/index/index",
 			"style": {
@@ -12,71 +18,70 @@
 			}
 		},
 		{
-			"path" : "pages/garden/garden",
-			"style" : 
-			{
-				"navigationBarTitleText" : "果园",
-				"enablePullDownRefresh" : false
+			"path": "pages/garden/garden",
+			"style": {
+				"navigationBarTitleText": "果园",
+				"enablePullDownRefresh": false
 			}
 		},
 		{
-			"path" : "pages/message/message",
-			"style" : 
-			{
-				"navigationBarTitleText" : "信息",
-				"enablePullDownRefresh" : false
+			"path": "pages/message/message",
+			"style": {
+				"navigationBarTitleText": "信息",
+				"enablePullDownRefresh": false
 			}
 		},
 		{
-			"path" : "pages/my/my",
-			"style" : 
-			{
-				"navigationBarTitleText" : "我的",
-				"enablePullDownRefresh" : false
+			"path": "pages/my/my",
+			"style": {
+				"navigationBarTitleText": "我的",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/store/store",
+			"style": {
+				"navigationBarTitleText": "商铺"
 			}
 		}
+
 	],
 	"subPackages": [
-		// 详情分包
+		// 支付分包
 		{
-			"root": "detail-pages",
-			"pages": [
-				
-				{
-					"path": "message-detail/message-detail"
-				}
-			]
+			"root": "payment-pages",
+			"pages": [{
+				"path": "setp1/setp1"
+			}]
 		},
-		// 日志分包
+		// 注册分包
 		{
-			"root": "log-pages",
-			"pages": [
-				{
-					"path": "days/days"
-				}
-			]
-		},
-		// 购置分包
-		{
-			"root": "purchase-pages",
-			"pages": [
-				{
-					"path": "goods/goods"
+			"root": "register-pages",
+			"pages": [{
+					"path": "choice/choice"
 				},
 				{
-					"path": "saplings/saplings"
+					"path": "person/person"
+				},
+				{
+					"path": "business/business"
 				}
 			]
 		},
 		// 展示分包
 		{
 			"root": "show-pages",
-			"pages": [
-				{
+			"pages": [{
 					"path": "showAll/showAll"
 				},
 				{
 					"path": "station/station"
+				},
+				{
+					"path": "time-log/time-log",
+					"style": {
+						"navigationBarTitleText": "时空胶囊"
+					}
 				}
 			]
 		}
@@ -87,40 +92,45 @@
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8"
 	},
-    "tabBar": {
-      "color": "#8a8a8a",
-      "selectedColor": "#0FD15A",
-      "borderStyle": "black",
-     
-      "fontSize": "12px",
-      "spacing": "5px",
-      "height": "50px",
-      "list" : [
-        {
-          "pagePath": "pages/index/index",
-          "text": "首页",
-          "iconPath": "static/tabbarIcons/index.png",
-          "selectedIconPath": "static/tabbarIcons/index_active.png"
-        },
-        {
-          "pagePath": "pages/garden/garden",
-          "text": "果园",
-          "iconPath": "static/tabbarIcons/orange.png",
-          "selectedIconPath": "static/tabbarIcons/orange_active.png"
-        },
-       {
-         "pagePath": "pages/message/message",
-         "text": "信息",
-         "iconPath": "static/tabbarIcons/message.png",
-         "selectedIconPath": "static/tabbarIcons/message_active.png"
-       },
-       {
-         "pagePath": "pages/my/my",
-         "text": "我的",
-         "iconPath": "static/tabbarIcons/my.png",
-         "selectedIconPath": "static/tabbarIcons/my_active.png"
-       }
-      ]
-    },
+	"tabBar": {
+		"color": "#8a8a8a",
+		"selectedColor": "#0FD15A",
+		"borderStyle": "black",
+
+		"fontSize": "12px",
+		"spacing": "5px",
+		"height": "50px",
+		"list": [{
+				"pagePath": "pages/index/index",
+				"text": "首页",
+				"iconPath": "static/tabbarIcons/index.png",
+				"selectedIconPath": "static/tabbarIcons/index_active.png"
+			},
+			{
+				"pagePath": "pages/garden/garden",
+				"text": "果园",
+				"iconPath": "static/tabbarIcons/orange.png",
+				"selectedIconPath": "static/tabbarIcons/orange_active.png"
+			},
+			{
+				"pagePath": "pages/store/store",
+				"text": "商铺",
+				"iconPath": "static/tabbarIcons/store.png",
+				"selectedIconPath": "static/tabbarIcons/store_active.png"
+			},
+			{
+				"pagePath": "pages/message/message",
+				"text": "信息",
+				"iconPath": "static/tabbarIcons/message.png",
+				"selectedIconPath": "static/tabbarIcons/message_active.png"
+			},
+			{
+				"pagePath": "pages/my/my",
+				"text": "我的",
+				"iconPath": "static/tabbarIcons/my.png",
+				"selectedIconPath": "static/tabbarIcons/my_active.png"
+			}
+		]
+	},
 	"uniIdRouter": {}
 }

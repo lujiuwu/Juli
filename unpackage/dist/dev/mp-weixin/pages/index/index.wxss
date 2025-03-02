@@ -26,6 +26,7 @@
 /* 文章场景相关 */
 .index {
   background-color: #F3FDED;
+  height: 100vh;
   /* 轮播 */
 }
 .index .swiper {
@@ -209,5 +210,64 @@
 }
 .index .popup-box .upload {
   margin-top: 30rpx;
+}
+.index .tools-list {
+  margin: 30rpx 20rpx 0;
+  background-color: #fff;
+  padding: 20rpx;
+}
+.index .tools-list .header {
+  font-weight: bold;
+  font-size: 32rpx;
+  margin-bottom: 20rpx;
+}
+.index .tools-list .body {
+  display: flex;
+}
+.index .tools-list .body .single-tool {
+  flex: 1;
+}
+.index .tools-list .body .single-tool .image {
+  display: flex;
+  justify-content: space-around;
+}
+.index .tools-list .body .single-tool .image .img {
+  height: 44px;
+  width: 44px;
+  border-radius: 50px;
+  margin-bottom: 20rpx;
+}
+.index .tools-list .body .single-tool .title {
+  text-align: center;
+}
+.index .new-info {
+  margin: 30rpx 20rpx 0;
+  background-color: #fff;
+  padding: 20rpx;
+}
+.index .new-info .header {
+  font-weight: bold;
+  font-size: 32rpx;
+  margin-bottom: 20rpx;
+}
+.index .new-info .body .single-info {
+  height: 64rpx;
+  line-height: 64rpx;
+  display: flex;
+}
+.index .new-info .body .single-info .title {
+  flex: 1;
+  font-size: 30rpx;
+  font-weight: bold;
+}
+.index .new-info .body .single-info .content {
+  flex: 6;
+  color: #858585;
+}
+.index .new-info .body .single-info .time {
+  text-align: right;
+  color: #A7A7A7;
+  font-size: 28rpx;
+  flex: 2;
 }
 

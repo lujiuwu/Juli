@@ -25,7 +25,9 @@
 /* 透明度 */
 /* 文章场景相关 */
 .garden {
-  background-color: #F3FDED;
+  height: 100vh;
+  width: 100vw;
+  background-color: #f3fded;
 }
 .garden .tree {
   position: relative;
@@ -36,34 +38,36 @@
   width: 100%;
   height: 100%;
 }
-.garden .tree .water {
-  border: 3px solid #2BBE14;
+.garden .tree .garden-tools {
   position: absolute;
   right: 0;
-  top: 120rpx;
-  width: 160rpx;
-  height: 82rpx;
+  top: 60rpx;
+}
+.garden .tree .garden-tools .single-tool {
+  margin-bottom: 10rpx;
+  border: 3px solid #2BBE14;
+  width: 190rpx;
+  height: 80rpx;
   background-color: rgba(255, 255, 255, 0.7);
   border-radius: 100rpx 0 0 100rpx;
   border-right: 0;
   display: flex;
   box-sizing: border-box;
-  padding-left: 20rpx;
+  padding-left: 14rpx;
 }
-.garden .tree .water .icon {
+.garden .tree .garden-tools .single-tool .icon {
   flex: 1;
   padding-top: 19rpx;
-  margin-right: 20rpx;
 }
-.garden .tree .water .icon .img {
+.garden .tree .garden-tools .single-tool .icon .img {
   width: 44rpx;
   height: 44rpx;
   vertical-align: middle;
 }
-.garden .tree .water .text {
+.garden .tree .garden-tools .single-tool .cnt {
   flex: 6;
-  line-height: 82rpx;
-  font-size: 30rpx;
+  line-height: 80rpx;
+  text-align: center;
 }
 .garden .tree .popup-content {
   padding: 20rpx;
@@ -110,48 +114,17 @@
   font-weight: bolder;
   font-size: 42rpx;
 }
-.garden .tree .recent {
-  border: 3px solid #2BBE14;
-  position: absolute;
-  right: 0;
-  top: 230rpx;
-  width: 160rpx;
-  height: 82rpx;
-  background-color: rgba(255, 255, 255, 0.7);
-  border-radius: 100rpx 0 0 100rpx;
-  border-right: 0;
-  display: flex;
-  padding-left: 20rpx;
-  box-sizing: border-box;
-}
-.garden .tree .recent .icon {
-  flex: 1;
-  padding-top: 19rpx;
-  margin-right: 20rpx;
-}
-.garden .tree .recent .icon .img {
-  width: 44rpx;
-  height: 44rpx;
-  vertical-align: middle;
-}
-.garden .tree .recent .text {
-  flex: 6;
-  line-height: 82rpx;
-  font-size: 30rpx;
-}
 .garden .days {
   display: flex;
-  width: 420rpx;
+  width: 600rpx;
   height: 80rpx;
   line-height: 80rpx;
-  background-color: #fff;
   border-bottom: 3px solid #0FD15A;
-  border-radius: 0 100rpx 100rpx 0;
   font-size: 34rpx;
-  padding-left: 30rpx;
+  padding-left: 20rpx;
 }
 .garden .days .text {
-  flex: 4;
+  flex: 9;
 }
 .garden .days .text .days-numbrer {
   font-size: 50rpx;
@@ -169,38 +142,91 @@
   width: 50rpx;
   height: 50rpx;
 }
-.garden .plant, .garden .buy {
-  margin-top: 25rpx;
-  padding: 0 20rpx;
+.garden .calendar-area .details {
+  background-color: #fff;
+  padding: 0 40rpx;
 }
-.garden .plant .head, .garden .buy .head {
-  font-size: 36rpx;
+.garden .calendar-area .details .details-title {
+  font-size: 32rpx;
 }
-.garden .plant .body, .garden .buy .body {
-  display: flex;
-  gap: 6rpx;
-  margin-top: 10rpx;
-  height: 180rpx;
+.garden .calendar-area .details .details-body {
+  height: 380rpx;
+  background: linear-gradient(#fff, #cfeef1);
+  margin-top: 20rpx;
+  position: relative;
 }
-.garden .plant .body .single-sapling, .garden .plant .body .single-good, .garden .buy .body .single-sapling, .garden .buy .body .single-good {
-  flex: 1;
+.garden .calendar-area .details .details-body .water-image {
+  position: absolute;
+  width: 190rpx;
+  height: 210rpx;
+  right: 40rpx;
+  bottom: 140rpx;
 }
-.garden .plant .body .single-sapling .sapling-img, .garden .plant .body .single-sapling .good-img, .garden .plant .body .single-good .sapling-img, .garden .plant .body .single-good .good-img, .garden .buy .body .single-sapling .sapling-img, .garden .buy .body .single-sapling .good-img, .garden .buy .body .single-good .sapling-img, .garden .buy .body .single-good .good-img {
+.garden .calendar-area .details .details-body .water-image .image {
   width: 100%;
   height: 100%;
 }
-.garden .plant .foot, .garden .buy .foot {
+.garden .businessShow .focus {
+  margin: 0 20rpx;
+  background-image: url("https://s2.loli.net/2025/03/01/y1MepPCA7YvaUkJ.png");
+  position: relative;
+  height: 204px;
+}
+.garden .businessShow .focus .bar {
+  position: absolute;
+  bottom: 0;
+  height: 50px;
+  left: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: #fff;
+  padding: 4px 20rpx;
+  box-sizing: border-box;
+}
+.garden .businessShow .focus .bar .title {
+  font-size: 30rpx;
+}
+.garden .businessShow .focus .bar .name {
+  font-size: 25rpx;
+}
+.garden .businessShow .tabs {
+  margin: 20rpx 0;
+}
+.garden .businessShow .detail {
+  padding: 20rpx;
+}
+.garden .businessShow .detail .single-detail {
+  border-radius: 5px;
   display: flex;
-  text-align: right;
-  color: #00973B;
-  font-size: 36rpx;
-  margin-top: 6rpx;
+  height: 75px;
+  margin-bottom: 20rpx;
+  flex-direction: row;
 }
-.garden .plant .foot .text, .garden .buy .foot .text {
-  flex: 19;
-  margin-right: 10rpx;
-}
-.garden .plant .foot .icon, .garden .buy .foot .icon {
+.garden .businessShow .detail .single-detail .head {
+  border-radius: 5px;
   flex: 1;
+  line-height: 75px;
+  color: #fff;
+  font-size: 34rpx;
+  text-align: center;
+}
+.garden .businessShow .detail .single-detail .body {
+  flex: 3;
+  display: flex;
+}
+.garden .businessShow .detail .single-detail .body .ele {
+  padding: 25rpx 0;
+  box-sizing: border-box;
+  width: 33%;
+  text-align: center;
+}
+.garden .businessShow .detail .single-detail .body .ele .number {
+  font-size: 34rpx;
+  font-weight: bold;
+}
+.garden .businessShow .detail .single-detail .body .ele .title {
+  color: #1f1e1e;
+  margin-top: 4px;
+  font-size: 26rpx;
 }
 

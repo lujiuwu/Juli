@@ -29,96 +29,182 @@
   height: 100vh;
 }
 .my .background {
-  background-color: #D0E5CB;
-  height: 380rpx;
-  position: relative;
+  padding: 50rpx 28rpx;
+  box-sizing: border-box;
+  background-image: url("https://s2.loli.net/2025/02/28/28jN7Kc3HMnxsDb.png");
+  height: 420rpx;
 }
-.my .background .my-avatar {
-  position: absolute;
-  left: 20rpx;
-  bottom: -100rpx;
+.my .background .base-info {
+  display: flex;
+  height: 180rpx;
 }
-.my .background .my-avatar .my-avatar-img {
-  height: 200rpx;
-  width: 200rpx;
+.my .background .base-info .info-avatar .my-avatar-img {
+  height: 180rpx;
+  width: 180rpx;
   border-radius: 100rpx;
 }
-.my .login .order {
-  padding: 0 28rpx;
-  height: 240rpx;
+.my .background .base-info .info-text {
+  color: #fff;
+  height: 180rpx;
+  padding-top: 40rpx;
+  margin-left: 20rpx;
+}
+.my .background .base-info .info-text .user-name {
+  font-weight: bold;
+  font-size: 32rpx;
+}
+.my .background .base-info .info-text .wx-number {
+  margin: 2px 0;
+}
+.my .background .operation-area {
+  display: flex;
+  justify-content: flex-end;
+}
+.my .background .operation-area .tag {
+  border: 1px solid #fff;
+  border-radius: 50px;
+  color: #fff;
+  height: 50rpx;
+  font-size: 28rpx;
+  line-height: 50rpx;
+  padding: 0 14rpx;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.my .background .operation-area .tag .u-icon {
+  padding-top: 10rpx;
+}
+.my .background .function-btns {
+  display: flex;
+  margin-top: 20rpx;
+  gap: 8px;
+}
+.my .background .function-btns .single-function {
+  flex: 1;
+  height: 100rpx;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: #fff;
+  padding: 10rpx 20rpx;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+.my .background .function-btns .single-function .des {
+  font-size: 26rpx;
+  margin-top: 3px;
+}
+.my .businessShow {
+  border-radius: 7px;
+  margin: 20rpx;
+  background-color: #76CB45;
+  height: 140px;
   display: flex;
   flex-direction: column;
-  margin-top: 140rpx;
-}
-.my .login .order .head {
-  padding-left: 6px;
-  flex: 1;
-  background-color: #fff;
-  border-bottom: 1px solid #B1B1B1;
-  line-height: 72rpx;
-  display: flex;
-}
-.my .login .order .head .title {
-  flex: 2;
-  margin-right: 12rpx;
-}
-.my .login .order .head .order-icon {
-  flex: 7;
-  display: flex;
-  align-items: center;
-}
-.my .login .order .head .order-icon .order-image {
-  height: 44rpx;
-  width: 44rpx;
-}
-.my .login .order .body {
-  padding-top: 20rpx;
-  flex: 7;
-  background-color: #fff;
-  display: flex;
-}
-.my .login .order .body .single-list {
-  flex: 1;
+  color: #fff;
+  padding: 0 20rpx;
   box-sizing: border-box;
-  padding: 0 45rpx;
+}
+.my .businessShow .front {
+  display: flex;
+  flex: 2;
+  border-bottom: 1px solid #F3FDED;
+}
+.my .businessShow .front .single-ele {
+  flex: 1;
+  text-align: center;
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+}
+.my .businessShow .front .single-ele .number {
+  font-weight: bold;
+  font-size: 40rpx;
+}
+.my .businessShow .front .single-ele .title {
+  margin-top: 5px;
+}
+.my .businessShow .back {
+  flex: 1;
   text-align: center;
   display: flex;
-  flex-direction: column;
+  align-items: center;
 }
-.my .login .aboutLogin {
-  display: flex;
-  flex-direction: column;
-  height: 200rpx;
-  padding: 0 28rpx;
-  margin-top: 50rpx;
-}
-.my .login .aboutLogin .out, .my .login .aboutLogin .change {
+.my .businessShow .back .c1,
+.my .businessShow .back .c2 {
   flex: 1;
-  background-color: #fff;
   display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.my .businessShow .back .c1 .number,
+.my .businessShow .back .c2 .number {
+  font-size: 34rpx;
+}
+.my .businessShow .back .c1 .title,
+.my .businessShow .back .c2 .title {
+  margin: 0 2px;
+}
+.my .personShow {
+  margin-top: 40rpx;
   padding-left: 20rpx;
 }
-.my .login .aboutLogin .out .icon, .my .login .aboutLogin .change .icon {
+.my .personShow .header {
+  font-weight: bold;
+  font-size: 32rpx;
+}
+.my .personShow .body {
+  margin-top: 20rpx;
+  flex-direction: row;
+  display: flex;
+  gap: 10px;
+}
+.my .personShow .body .single-good {
+  width: 153px;
+  height: 192px;
+}
+.my .personShow .body .single-good .image {
+  width: 153px;
+  height: 141px;
+}
+.my .personShow .body .single-good .image .img {
+  width: 100%;
+  height: 100%;
+  background-color: pink;
+}
+.my .personShow .body .single-good .title {
+  margin: 3px;
+  font-weight: bold;
+}
+.my .personShow .body .single-good .detail {
+  display: flex;
+  font-size: 26rpx;
+}
+.my .personShow .body .single-good .detail .price {
+  flex: 1;
+  text-align: left;
+  color: #F43838;
+}
+.my .personShow .body .single-good .detail .sale {
+  flex: 1;
+  text-align: right;
+  color: #7C7C7C;
+}
+.my .function-list {
+  margin-top: 50rpx;
+}
+.my .function-list .single-function {
+  background-color: #fff;
+  height: 40px;
+  line-height: 40px;
+  display: flex;
+  padding: 0 20rpx;
+  border-bottom: 1px solid #C1D0B8;
+}
+.my .function-list .single-function .icon {
   flex: 1;
   display: flex;
   align-items: center;
 }
-.my .login .aboutLogin .out .icon .icon-img, .my .login .aboutLogin .change .icon .icon-img {
-  width: 50rpx;
-  height: 50rpx;
-}
-.my .login .aboutLogin .out .title, .my .login .aboutLogin .change .title {
-  flex: 7;
-  line-height: 100rpx;
-}
-.my .login .aboutLogin .out {
-  border-bottom: 1px solid #666;
-}
-.my .loginout {
-  margin-top: 140rpx;
-  padding: 0 28rpx;
-}
-.my .loginout .content {
-  background-color: #fff;
+.my .function-list .single-function .title {
+  flex: 12;
+  font-size: 28rpx;
 }
 

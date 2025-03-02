@@ -1,35 +1,33 @@
 {
   "pages": [
+    "pages/login/login",
     "pages/index/index",
     "pages/garden/garden",
     "pages/message/message",
-    "pages/my/my"
+    "pages/my/my",
+    "pages/store/store"
   ],
   "subPackages": [
     {
-      "root": "detail-pages",
+      "root": "payment-pages",
       "pages": [
-        "message-detail/message-detail"
+        "setp1/setp1"
       ]
     },
     {
-      "root": "log-pages",
+      "root": "register-pages",
       "pages": [
-        "days/days"
-      ]
-    },
-    {
-      "root": "purchase-pages",
-      "pages": [
-        "goods/goods",
-        "saplings/saplings"
+        "choice/choice",
+        "person/person",
+        "business/business"
       ]
     },
     {
       "root": "show-pages",
       "pages": [
         "showAll/showAll",
-        "station/station"
+        "station/station",
+        "time-log/time-log"
       ]
     }
   ],
@@ -58,6 +56,12 @@
         "text": "果园",
         "iconPath": "static/tabbarIcons/orange.png",
         "selectedIconPath": "static/tabbarIcons/orange_active.png"
+      },
+      {
+        "pagePath": "pages/store/store",
+        "text": "商铺",
+        "iconPath": "static/tabbarIcons/store.png",
+        "selectedIconPath": "static/tabbarIcons/store_active.png"
       },
       {
         "pagePath": "pages/message/message",

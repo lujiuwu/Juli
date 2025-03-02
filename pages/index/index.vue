@@ -1,7 +1,7 @@
 <template>
 	<view class="index">
 		<!-- 第一部分 -- 轮播图 -->
-		<!-- 轮播图 -->
+		<!-- 轮播图 -- 公共部分 -->
 		<view class="image-swiper">
 			<swiper class="swiper" indicator-dots="true" circular="true" autoplay="true" interval="5000"
 				duration="1500">
@@ -10,145 +10,210 @@
 				</swiper-item>
 			</swiper>
 		</view>
-		<!-- 第二部分 -- 果园积分榜单 -->
-		<view class="garden-ranking-list">
-			<!-- 顶部 -->
-			<view class="head">
-				<!-- 左侧 -- 标题 -->
-				<view class="title" style="font-weight: bold;">
-					果园积分榜单
+
+		<!-- 普通用户 -->
+		<view class="personShow" v-if="!identity">
+			<!-- 第二部分 -- 果园积分榜单 -->
+			<view class="garden-ranking-list">
+				<!-- 顶部 -->
+				<view class="head">
+					<!-- 左侧 -- 标题 -->
+					<view class="title" style="font-weight: bold;">
+						果园积分榜单
+					</view>
+					<!-- 右侧 -- 分段器 -->
+					<view class="subsetion-choice">
+						<u-subsection :list="list" :current="curNow" @change="sectionChange" fontSize="16"
+							:animation="true" :bold="true" :inactiveColor="'#007a2e'"
+							:activeColor="'#000'"></u-subsection>
+					</view>
 				</view>
-				<!-- 右侧 -- 分段器 -->
-				<view class="subsetion-choice">
-					<u-subsection :list="list" :current="curNow" @change="sectionChange" fontSize="16" :animation="true"
-						:bold="true" :inactiveColor="'#007a2e'" :activeColor="'#000'"></u-subsection>
+				<!-- 主体 -- 榜单 -->
+				<view class="body">
+					<!-- 榜单背景 -->
+					<view class="list-body">
+						<!-- 第一行 -- 个人信息 -->
+						<view class="myInfo">
+							<!-- 排名 -->
+							<view class="my-rank">
+								{{curRank}}
+							</view>
+							<!-- 头像 -->
+							<view class="my-avatar">
+								<image :src="userInfo.img" class="avatar-image"></image>
+							</view>
+							<!-- 用户名 -->
+							<view class="my-username">
+								{{userInfo.username}}
+								<span class="des"> (我自己)</span>
+							</view>
+							<!-- 积分数目 -->
+							<view class="rank-number">
+								{{curNow===0?userInfo.daily:curNow===1?userInfo.weekly:userInfo.monthly}}
+							</view>
+						</view>
+						<!-- 其余行 -- 好友信息 -->
+						<!-- 只显示排名前三 -->
+						<view v-for="(item,index) in showList" :key="index" class="all-rank">
+							<view class="single-rank">
+								<image class="rank-image" :src="item.rank"></image>
+							</view>
+							<view class="single-avatar">
+								<image :src="item.img?item.img:'../../static/default_avatar.png'" class="avatar-image">
+								</image>
+							</view>
+							<view class="single-username">
+								{{item.username}}
+							</view>
+							<view class="single-rank-number">
+								{{curNow===0?item.daily:curNow===1?item.weekly:item.monthly}}
+							</view>
+						</view>
+						<!-- 查看更多好友 -->
+						<view class="showMore">
+							<!-- 文字 -->
+							<view class="text" @click="gotoShowAll">
+								<!-- 点击跳转页面 -- 显示所有好友榜单信息 -->
+								查看更多好友
+							</view>
+						</view>
+					</view>
+
+
+				</view>
+
+			</view>
+			<!-- 第三部分 -- 获取积分 -->
+			<view class="getPoints">
+				<!-- 头部 -- 标题 -->
+				<view class="head" style="font-weight: bold;">
+					<text>获取积分</text>
+				</view>
+				<!-- 主体 -- 三个获取积分的选项 -->
+				<view class="body">
+
+					<view v-for="(item,index) in pointsWay" :key="index" class="get-choice"
+						:style="{backgroundColor:item.color}">
+						<text class="text">{{item.text}}</text>
+
+						<!-- 添加加号 -- 子绝父相 -->
+						<view class="get-add" @click="showPopup(index)">
+							+
+							<!-- 怎么这么看有点不专业（） -->
+							<!-- 没事的 本来就不专业 2024,4,23 -->
+						</view>
+					</view>
 				</view>
 			</view>
-			<!-- 主体 -- 榜单 -->
-			<view class="body">
-				<!-- 榜单背景 -->
-				<view class="list-body">
-					<!-- 第一行 -- 个人信息 -->
-					<view class="myInfo">
-						<!-- 排名 -->
-						<view class="my-rank">
-							{{curRank}}
-						</view>
-						<!-- 头像 -->
-						<view class="my-avatar">
-							<image :src="userInfo.img" class="avatar-image"></image>
-						</view>
-						<!-- 用户名 -->
-						<view class="my-username">
-							{{userInfo.username}}
-							<span class="des"> (我自己)</span>
-						</view>
-						<!-- 积分数目 -->
-						<view class="rank-number">
-							{{curNow===0?userInfo.daily:curNow===1?userInfo.weekly:userInfo.monthly}}
-						</view>
-					</view>
-					<!-- 其余行 -- 好友信息 -->
-					<!-- 只显示排名前三 -->
-					<view v-for="(item,index) in showList" :key="index" class="all-rank">
-						<view class="single-rank">
-							<image class="rank-image" :src="item.rank"></image>
-						</view>
-						<view class="single-avatar">
-							<image :src="item.img?item.img:'../../static/default_avatar.png'" class="avatar-image">
-							</image>
-						</view>
-						<view class="single-username">
-							{{item.username}}
-						</view>
-						<view class="single-rank-number">
-							{{curNow===0?item.daily:curNow===1?item.weekly:item.monthly}}
-						</view>
-					</view>
-					<!-- 查看更多好友 -->
-					<view class="showMore">
-						<!-- 文字 -->
-						<view class="text" @click="gotoShowAll">
-							<!-- 点击跳转页面 -- 显示所有好友榜单信息 -->
-							参看更多好友
-						</view>
+			<!-- 第四部分 -- 弹出层 -->
+			<u-popup :show="show1" mode="bottom" @close="show1=false" @open="show1=true" :safeAreaInsetBottom="false"
+				closeable="true">
+				<view class="popup-box">
+					<text class="test">
+						此处用于上传图片(微信步数)
+					</text>
+					<!-- 上传图片位置 -->
+					<view class="upload">
+						<u-upload :fileList="fileList1" @afterRead="afterRead" @delete="deletePic" name="1" multiple
+							:maxCount="10"></u-upload>
 					</view>
 				</view>
-
-
-			</view>
-
+			</u-popup>
+			<u-popup :show="show2" mode="bottom" @close="show2=false" @open="show2=true" :safeAreaInsetBottom="false"
+				closeable="true">
+				<view class="popup-box">
+					<text class="test">
+						此处用于上传图片(Keep打卡)
+					</text>
+					<!-- 上传图片位置 -->
+					<view class="upload">
+						<u-upload :fileList="fileList1" @afterRead="afterRead" @delete="deletePic" name="1" multiple
+							:maxCount="10"></u-upload>
+					</view>
+				</view>
+			</u-popup>
+			<u-popup :show="show3" mode="bottom" @close="show3=false" @open="show3=true" :safeAreaInsetBottom="false"
+				closeable="true">
+				<view class="popup-box">
+					<text class="test">
+						此处用于上传图片(其他方式)
+					</text>
+					<!-- 上传图片位置 -->
+					<view class="upload">
+						<u-upload :fileList="fileList1" @afterRead="afterRead" @delete="deletePic" name="1" multiple
+							:maxCount="10"></u-upload>
+					</view>
+				</view>
+			</u-popup>
 		</view>
-		<!-- 第三部分 -- 获取积分 -->
-		<view class="getPoints">
-			<!-- 头部 -- 标题 -->
-			<view class="head" style="font-weight: bold;">
-				<text>获取积分</text>
-			</view>
-			<!-- 主体 -- 三个获取积分的选项 -->
-			<view class="body">
-
-				<view v-for="(item,index) in pointsWay" :key="index" class="get-choice"
-					:style="{backgroundColor:item.color}">
-					<text class="text">{{item.text}}</text>
-
-					<!-- 添加加号 -- 子绝父相 -->
-					<view class="get-add" @click="showPopup(index)">
-						+
-						<!-- 怎么这么看有点不专业（） -->
-						<!-- 没事的 本来就不专业 2024,4,23 -->
+		<!-- 商家用户 -->
+		<view class="businessShow" v-else>
+			<view class="tools-list">
+				<div class="header">常用工具</div>
+				<div class="body">
+					<view class="single-tool" v-for="(item,index) in tools_list" :key="index">
+						<view class="image">
+							<image :src="item.image" class="img"></image>
+						</view>
+						<view class="title">
+							{{item.title}}
+						</view>
 					</view>
-				</view>
+				</div>
+			</view>
+			<view class="new-info">
+				<div class="header">最新动态</div>
+				<div class="body">
+					<view class="single-info">
+						<view class="title">
+							公告
+						</view>
+						<view class="content">
+							淘宝推出"大服饰全球包邮计划"
+						</view>
+						<view class="time">
+							2分钟前
+						</view>
+					</view>
+					<view class="single-info">
+						<view class="title">
+							公告
+						</view>
+						<view class="content">
+							淘宝推出"大服饰全球包邮计划"
+						</view>
+						<view class="time">
+							2分钟前
+						</view>
+					</view>
+					<view class="single-info">
+						<view class="title">
+							公告
+						</view>
+						<view class="content">
+							淘宝推出"大服饰全球包邮计划"
+						</view>
+						<view class="time">
+							2分钟前
+						</view>
+					</view>
+				</div>
 			</view>
 		</view>
-		<!-- 第四部分 -- 弹出层 -->
-		<u-popup :show="show1" mode="bottom" @close="show1=false" @open="show1=true" :safeAreaInsetBottom="false"
-			closeable="true">
-			<view class="popup-box">
-				<text class="test">
-					此处用于上传图片(微信步数)
-				</text>
-				<!-- 上传图片位置 -->
-				<view class="upload">
-					<u-upload :fileList="fileList1" @afterRead="afterRead" @delete="deletePic" name="1" multiple
-						:maxCount="10"></u-upload>
-				</view>
-			</view>
-		</u-popup>
-		<u-popup :show="show2" mode="bottom" @close="show2=false" @open="show2=true" :safeAreaInsetBottom="false"
-			closeable="true">
-			<view class="popup-box">
-				<text class="test">
-					此处用于上传图片(Keep打卡)
-				</text>
-				<!-- 上传图片位置 -->
-				<view class="upload">
-					<u-upload :fileList="fileList1" @afterRead="afterRead" @delete="deletePic" name="1" multiple
-						:maxCount="10"></u-upload>
-				</view>
-			</view>
-		</u-popup>
-		<u-popup :show="show3" mode="bottom" @close="show3=false" @open="show3=true" :safeAreaInsetBottom="false"
-			closeable="true">
-			<view class="popup-box">
-				<text class="test">
-					此处用于上传图片(其他方式)
-				</text>
-				<!-- 上传图片位置 -->
-				<view class="upload">
-					<u-upload :fileList="fileList1" @afterRead="afterRead" @delete="deletePic" name="1" multiple
-						:maxCount="10"></u-upload>
-				</view>
-			</view>
-		</u-popup>
-
 	</view>
 </template>
 
 <script>
+	import {
+		mapState
+	} from 'vuex'
+
 	import color from '../../uni_modules/uview-ui/libs/config/color';
 	var _ = require('lodash');
 	export default {
+		computed: {
+			...mapState(['identity'])
+		},
 		data() {
 			return {
 				title: 'Hello',
@@ -241,7 +306,24 @@
 				fileList1: [],
 				show1: false,
 				show2: false,
-				show3: false
+				show3: false,
+				tools_list: [{
+						image: "https://s2.loli.net/2025/03/01/tjn65iXSvWCHxJz.png",
+						title: "商品管理"
+					},
+					{
+						image: "https://s2.loli.net/2025/03/01/sADhTbBlqp6aK7g.png",
+						title: "订单管理"
+					},
+					{
+						image: "https://s2.loli.net/2025/03/01/eRaMgOJTXu4WNrY.png",
+						title: "打单工具"
+					},
+					{
+						image: "https://s2.loli.net/2025/03/01/1VL3Kekf79WodcY.png",
+						title: "寄快递"
+					},
+				]
 
 			}
 		},
@@ -338,13 +420,14 @@
 						}
 					});
 				})
-			}
+			},
 
 
 		},
 		onLoad() {
 			// 初始加载后就调用sectionChange方法 -- 显示初始排名（日榜）
 			this.sectionChange(0)
+			console.log(this.identity)
 		}
 	}
 </script>
@@ -353,6 +436,7 @@
 	// 全局
 	.index {
 		background-color: #F3FDED;
+		height: 100vh;
 
 		/* 轮播 */
 		.swiper {
@@ -590,6 +674,82 @@
 
 			}
 
+		}
+
+		.tools-list {
+			margin: 30rpx 20rpx 0;
+			background-color: #fff;
+			padding: 20rpx;
+
+			.header {
+				font-weight: bold;
+				font-size: 32rpx;
+				margin-bottom: 20rpx;
+			}
+
+			.body {
+				display: flex;
+
+				.single-tool {
+					flex: 1;
+
+					.image {
+						display: flex;
+						justify-content: space-around;
+
+						.img {
+							height: 44px;
+							width: 44px;
+							border-radius: 50px;
+							margin-bottom: 20rpx;
+						}
+
+
+					}
+
+					.title {
+						text-align: center;
+					}
+				}
+			}
+		}
+
+		.new-info {
+			margin: 30rpx 20rpx 0;
+			background-color: #fff;
+			padding: 20rpx;
+
+			.header {
+				font-weight: bold;
+				font-size: 32rpx;
+				margin-bottom: 20rpx;
+			}
+
+			.body {
+				.single-info {
+					height: 64rpx;
+					line-height: 64rpx;
+					display: flex;
+
+					.title {
+						flex: 1;
+						font-size: 30rpx;
+						font-weight: bold;
+					}
+
+					.content {
+						flex: 6;
+						color: #858585;
+					}
+
+					.time {
+						text-align: right;
+						color: #A7A7A7;
+						font-size: 28rpx;
+						flex: 2;
+					}
+				}
+			}
 		}
 
 

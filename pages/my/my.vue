@@ -2,219 +2,471 @@
 	<view class="my">
 		<!-- 第一部分 -- 背景 -->
 		<view class="background">
-			<!-- 头像 -- 绝对定位 -->
-			<view class="my-avatar">
-				<image src="../../static/avatar.jpg" mode="" class="my-avatar-img"></image>
+			<!-- 头像 -->
+			<view class="base-info">
+				<view class="info-avatar">
+					<image src="../../static/avatar.jpg" mode="" class="my-avatar-img"></image>
+				</view>
+				<view class="info-text">
+					<view class="user-name">
+						用户12306
+					</view>
+					<view class="wx-number">
+						绑定邮箱：12306
+					</view>
+					<view class="ip-info">
+						IP属地：四川
+					</view>
+				</view>
+			</view>
+			<!-- 设置 -->
+			<view class="operation-area">
+				<view class="tag" @click="loginOut">
+					退出登录
+				</view>
+				<view class="tag">
+					<u-icon name="setting" color="#fff" size="18"></u-icon>
+				</view>
+			</view>
+			<!-- 快捷功能键 -->
+			<view class="function-btns">
+				<view class="single-function" v-for="(item,index) in function_btns" :key="index">
+					<view class="title">
+						{{item.title}}
+					</view>
+					<view class="des">
+						{{item.des}}
+					</view>
+				</view>
 			</view>
 		</view>
-		<!-- 登录时显示 -->
-		<view class="login" v-show="isLogin">
-			
-			
-			<!-- 第三部分 -- 订单信息 -->
-			<view class="order">
-				<!-- 头部 -->
-				<view class="head">
-					<!-- 左侧 -- 标题 -->
-					<view class="title">
-						我的订单
-					</view>
-					<!-- 右侧 -- 订单图标 -->
-					<view class="order-icon">
-						<image src="../../static/订单.png" class="order-image"></image>
-					</view>
-					<!-- 最右侧 -- 指向图标 -->
-					<view class="arraw">
-						<u-icon name="arrow-right-double" color="#000" size="28"></u-icon>
-					</view>
+
+		<view class="function-list">
+			<view class="single-function" v-for="(item,index) in function_list" :key="index">
+				<view class="icon">
+					<u-icon :name="item.icon" size="27" :color="item.color"></u-icon>
 				</view>
-				<!-- 主体 -->
-				<view class="body">
-					<view class="single-list" v-for="(item,index) in listData" :key="index">
-						 <view class="icon">
-						 	<u-icon :name="item.icon" color="#000" size="50"></u-icon>
-						 </view>
-						 <view class="text">
-						 	{{item.title}}
-						 </view>
-					</view>
+				<view class="title">
+					{{item.title}}
 				</view>
-			</view>
-			<!-- 第四部分 -- 退出登录 & 切换账号 -->
-			<view class="aboutLogin">
-				<view class="out" @click="show = true">
-					<view class="icon">
-						<image src="../../static/退出登录.png" class="icon-img"></image>
-					</view>
-					<view class="title">
-						退出登录
-					</view>
-				</view>
-				<view class="change">
-					<view class="icon">
-						<u-icon name="info-circle" color="#7c7c7c" size="28"></u-icon>
-					</view>
-					<view class="title">
-						关于我们
-					</view>
-				</view>
-			</view>
-			<!-- 第五部分 -- 退出登录弹出框 -->
-			<view class="loginOut">
-				<u-modal @confirm="loginOut" @cancel="show=false" :show="show" :title="title" :content='content' :showCancelButton="true"></u-modal>
 			</view>
 		</view>
+		<!-- 商家用户 -->
+		<view class="businessShow" v-if="identity">
+			<view class="front">
+				<view v-for="(item,index) in package_list" :key="index" class="single-ele">
+					<view class="number">
+						{{item.number}}
+					</view>
+					<view class="title">
+						{{item.title}}
+					</view>
+				</view>
+			</view>
+			<view class="back">
+				<view class="c1">
+					<view class="icon">
+						<u-icon name="order" size="24" color="#fff"></u-icon>
+					</view>
+					<view class="text">
+						<span class="title">工单</span>
+						<span class="number">1</span>
+					</view>
+				</view>
+				<view class="c2">
+					<view class="icon">
+						<u-icon name="warning" size="24" color="#fff"></u-icon>
+					</view>
+					<view class="text">
+						<span class="title">处罚预警</span>
+						<span class="number">2</span>
+					</view>
+				</view>
+			</view>
+		</view>
+		<!-- 普通用户 -->
+
+		<view class="personShow" v-else>
+			<view class="header">
+				猜你想看
+			</view>
+			<view class="body">
+				<view class="single-good" v-for="(item,index) in goods_list" :key="index">
+					<view class="image">
+						<image :src="item.img" class="img"></image>
+					</view>
+					<view class="title">
+						{{item.name}}
+					</view>
+					<view class="detail">
+						<span class="price">￥{{item.commdityPrice}}元/斤</span>
+						<span class="sale">销量 12</span>
+					</view>
+				</view>
+			</view>
+		</view>
+
 	</view>
 </template>
 
 <script>
+	import {
+		mapState
+	} from 'vuex'
 	export default {
+		computed: {
+			...mapState(['identity'])
+		},
 		data() {
 			return {
-				show:false,
-				title:'提示',
-				content:'确认退出登录吗',
+				show: false,
+				title: '提示',
+				content: '确认退出登录吗',
 				// 控制登录状态
-				isLogin:true,
+				isLogin: true,
 				// 订单数据
-				listData:[
-					{
-						title:'待付款',
-						icon:'order'
+				listData: [{
+						title: '待付款',
+						icon: 'order'
 					},
 					{
-						title:'待发货',
-						icon:'email'
+						title: '待发货',
+						icon: 'email'
 					},
 					{
-						title:'待收货',
-						icon:'bag'
+						title: '待收货',
+						icon: 'bag'
 					},
 					{
-						title:'待评价',
-						icon:'chat'
+						title: '待评价',
+						icon: 'chat'
+					}
+				],
+				// 快捷功能键列表
+				function_btns: [{
+						title: "采购",
+						des: "好吃又好买"
+					},
+					{
+						title: "订单",
+						des: "查看我的订单"
+					},
+					{
+						title: "购物车",
+						des: "10个商品"
+					}
+				],
+				function_list: [{
+						icon: 'fingerprint',
+						title: '认证信息(实名&绑定)',
+						color: "#7AC24F"
+					},
+					{
+						icon: "question-circle",
+						title: '帮助中心',
+						color: "#44D7B6"
+					},
+					{
+						icon: 'kefu-ermai',
+						title: "联系客服",
+						color: "#0191FF"
+					},
+					{
+						icon: 'more-circle',
+						title: "关于我们",
+						color: "#DC9613"
+					},
+					{
+						icon: "chat",
+						title: "我要反馈",
+						color: "#D1B456"
+					}
+				],
+				package_list: [{
+						title: "待付款",
+						number: 0
+					},
+					{
+						title: "待发货",
+						number: 5
+					},
+					{
+						title: "待售后",
+						number: 0
+					},
+					{
+						title: "待评价",
+						number: 0
+					}
+				],
+				goods_list: [{
+						img: "https://s2.loli.net/2025/02/28/TGcwzDmtE3gX1ZK.png",
+						name: '好吃多汁高品质柑橘',
+						commdityPrice: 20
+					},
+					{
+						img: "https://s2.loli.net/2025/02/28/RSgnp9szO5YxvAa.png",
+						name: '好吃多汁高品质柑橘',
+						commdityPrice: 12
+					},
+					{
+						img: "https://s2.loli.net/2025/02/28/bAC3kgQVfosvJ1w.png",
+						name: '好吃多汁高品质柑橘',
+						commdityPrice: 13
 					}
 				]
 			}
 		},
 		methods: {
 			// 退出登录
-			loginOut(){
-				
-				this.isLogin = false
-				this.show = false
+			loginOut() {
+				uni.showModal({
+					title: '提示', // 对话框标题
+					content: '确认退出登录吗？', // 显示的内容
+
+					success: function(res) {
+						if (res.confirm) {
+							uni.navigateTo({
+								url: "/pages/login/login"
+							})
+						} else if (res.cancel) {
+							console.log('用户点击取消');
+						}
+					}
+				});
 			}
 		}
 	}
 </script>
 
 <style lang="scss">
-.my{
-	background: #E8FADE;
-	height: 100vh;
-		.background{
-			background-color: #D0E5CB;
-			height: 380rpx;
-			position: relative;
-			.my-avatar{
-				position: absolute;
-				left: 20rpx;
-				bottom: -100rpx;
-				.my-avatar-img{
-					height: 200rpx;
-					width: 200rpx;
-					border-radius: 100rpx;
-				}
-			}
-		}
-		
-	.login{
-		
-		.order{
-			padding: 0 28rpx;
-			height: 240rpx;
-			display: flex;
-			flex-direction: column;
-			margin-top: 140rpx;
-			.head{
-				padding-left: 6px;
-				flex: 1;
-				background-color: #fff;
-				border-bottom: 1px solid #B1B1B1;
-				line-height: 72rpx;
+	.my {
+		background: #E8FADE;
+		height: 100vh;
+
+		.background {
+			// background-color: pink;
+			padding: 50rpx 28rpx;
+			box-sizing: border-box;
+			background-image: url("https://s2.loli.net/2025/02/28/28jN7Kc3HMnxsDb.png");
+			height: 420rpx;
+
+			.base-info {
 				display: flex;
-				.title{
-					flex: 2;
-					margin-right: 12rpx;
+				height: 180rpx;
+
+				.info-avatar {
+					.my-avatar-img {
+						height: 180rpx;
+						width: 180rpx;
+						border-radius: 100rpx;
+					}
 				}
-				.order-icon{
-					flex: 7;
-					display: flex;
-					align-items: center;
-					.order-image{
-						height: 44rpx;
-						width: 44rpx;
+
+				.info-text {
+					color: #fff;
+					height: 180rpx;
+					padding-top: 40rpx;
+					margin-left: 20rpx;
+
+					.user-name {
+						font-weight: bold;
+						font-size: 32rpx;
+					}
+
+					.wx-number {
+						margin: 2px 0;
+					}
+
+
+				}
+
+			}
+
+			.operation-area {
+				display: flex;
+				justify-content: flex-end;
+
+				.tag {
+					border: 1px solid #fff;
+					border-radius: 50px;
+					color: #fff;
+					height: 50rpx;
+					font-size: 28rpx;
+					line-height: 50rpx;
+					padding: 0 14rpx;
+					background-color: rgba(0, 0, 0, 0.3);
+
+					.u-icon {
+						padding-top: 10rpx;
 					}
 				}
 			}
-			.body{
-				padding-top: 20rpx;
-				flex: 7;
-				background-color: #fff;
+
+			.function-btns {
 				display: flex;
-				.single-list{
+
+				margin-top: 20rpx;
+				gap: 8px;
+
+				.single-function {
 					flex: 1;
+					height: 100rpx;
+					background-color: rgba(0, 0, 0, 0.3);
+					color: #fff;
+					padding: 10rpx 20rpx;
 					box-sizing: border-box;
-					padding: 0 45rpx;
-					text-align: center;
-					// background-color: pink;
-					display: flex;
-					flex-direction: column;
+					border-radius: 5px;
+
+					.des {
+						font-size: 26rpx;
+						margin-top: 3px;
+					}
 				}
 			}
+
 		}
-		.aboutLogin{
+
+		.businessShow {
+			border-radius: 7px;
+			margin: 20rpx;
+			background-color: #76CB45;
+			height: 140px;
 			display: flex;
 			flex-direction: column;
-			height: 200rpx;
-			padding: 0 28rpx;
-			margin-top: 50rpx;
-				
-			.out,.change{
-				
-				flex: 1;
-				background-color: #fff;
+			color: #fff;
+			padding: 0 20rpx;
+			box-sizing: border-box;
+
+			.front {
 				display: flex;
-				padding-left: 20rpx;
-				.icon{
+				flex: 2;
+				border-bottom: 1px solid #F3FDED;
+
+				.single-ele {
+					flex: 1;
+					text-align: center;
+					flex-direction: column;
+					display: flex;
+					justify-content: center;
+
+					.number {
+						font-weight: bold;
+						font-size: 40rpx;
+					}
+
+					.title {
+						margin-top: 5px;
+					}
+				}
+			}
+
+			.back {
+				flex: 1;
+				text-align: center;
+				display: flex;
+				align-items: center;
+
+				.c1,
+				.c2 {
 					flex: 1;
 					display: flex;
 					align-items: center;
-					.icon-img{
-						width: 50rpx;
-						height: 50rpx;
-						
+					justify-content: center;
+
+					.number {
+						font-size: 34rpx;
+					}
+
+					.title {
+						margin: 0 2px;
 					}
 				}
-				.title{
-					flex: 7;
-					line-height: 100rpx;
+			}
+		}
+
+		.personShow {
+			margin-top: 40rpx;
+			padding-left: 20rpx;
+
+			.header {
+				font-weight: bold;
+				font-size: 32rpx;
+			}
+
+			.body {
+				margin-top: 20rpx;
+				flex-direction: row;
+				display: flex;
+				gap: 10px;
+
+				.single-good {
+					width: 153px;
+					height: 192px;
+
+					.image {
+						width: 153px;
+						height: 141px;
+
+						.img {
+							width: 100%;
+							height: 100%;
+							background-color: pink;
+						}
+					}
+
+					.title {
+						margin: 3px;
+						font-weight: bold;
+					}
+
+					.detail {
+						display: flex;
+						font-size: 26rpx;
+
+						.price {
+							flex: 1;
+							text-align: left;
+							color: #F43838;
+						}
+
+						.sale {
+							flex: 1;
+							text-align: right;
+							color: #7C7C7C;
+						}
+					}
 				}
-				
 			}
-			.out{
-				border-bottom: 1px solid #666;
+
+		}
+
+		.function-list {
+			margin-top: 50rpx;
+
+			.single-function {
+				background-color: #fff;
+				height: 40px;
+				line-height: 40px;
+				display: flex;
+				padding: 0 20rpx;
+				border-bottom: 1px solid #C1D0B8;
+
+				.icon {
+					flex: 1;
+					display: flex;
+					align-items: center;
+				}
+
+				.title {
+					flex: 12;
+					font-size: 28rpx;
+
+				}
 			}
 		}
+
+
+
 	}
-	.loginout{
-		margin-top: 140rpx;
-		padding: 0 28rpx;
-		.content{
-			
-			background-color: #fff;
-		}
-	}
-	
-}
 </style>

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "时空胶囊",
+  "usingComponents": {
+    "u-icon": "/uni_modules/uview-ui/components/u-icon/u-icon"
+  }
+}

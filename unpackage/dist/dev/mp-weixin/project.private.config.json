@@ -2,11 +2,67 @@
   "description": "项目私有配置文件。此文件中的内容将覆盖 project.config.json 中的相同字段。项目的改动优先同步到此文件中。详见文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html",
   "projectname": "种一棵树",
   "setting": {
-    "compileHotReLoad": true
+    "compileHotReLoad": false
   },
   "condition": {
     "miniprogram": {
       "list": [
+        {
+          "name": "show-pages/time-log/time-log",
+          "pathName": "show-pages/time-log/time-log",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "payment-pages/setp1/setp1",
+          "pathName": "payment-pages/setp1/setp1",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/my/my",
+          "pathName": "pages/my/my",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "register-pages/business/business",
+          "pathName": "register-pages/business/business",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "register-pages/person/person",
+          "pathName": "register-pages/person/person",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "register-pages/choice/choice",
+          "pathName": "register-pages/choice/choice",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/login/login",
+          "pathName": "pages/login/login",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/store/store",
+          "pathName": "pages/store/store",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
         {
           "name": "purchase-pages/saplings/saplings",
           "pathName": "purchase-pages/saplings/saplings",
